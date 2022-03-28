@@ -4,10 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDateTime;
 
 @Entity													 //Transforma em tabela
@@ -28,10 +32,22 @@ public class Postagem {
 	@UpdateTimestamp                                    //Formata de acordo com a data do seu pc
 	private LocalDateTime data;
 	
+	@ManyToOne                                         //Chave estrangeira
+	@JsonIgnoreProperties("postagem")                 //Evita o GET infinito
+	private Tema tema;
+	
 	//MANDAR E RECEBER DADOS GET/SET
 	
 	public Long getId() {
 		return id;
+	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 
 	public void setId(Long id) {
