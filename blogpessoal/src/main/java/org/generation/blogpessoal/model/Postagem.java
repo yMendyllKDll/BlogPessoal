@@ -36,6 +36,10 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")                 //Evita o GET infinito
 	private Tema tema;
 	
+	@ManyToOne                                         //Chave estrangeira
+	@JsonIgnoreProperties("postagem")                 //Evita o GET infinito
+	private Usuario usuario;
+	
 	//MANDAR E RECEBER DADOS GET/SET
 	
 	public Long getId() {
@@ -76,5 +80,13 @@ public class Postagem {
 
 	public void setData(LocalDateTime data) {
 		this.data = data;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

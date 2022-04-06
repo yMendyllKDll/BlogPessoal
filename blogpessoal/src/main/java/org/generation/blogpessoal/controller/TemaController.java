@@ -2,6 +2,8 @@ package org.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.generation.blogpessoal.model.Tema;
 import org.generation.blogpessoal.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class TemaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getById(@PathVariable long id){
+	public ResponseEntity<Tema> getById(@PathVariable Long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)) //"map(resp ->)" Serve como para achar ou não
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -42,7 +44,7 @@ public class TemaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Tema> post (@RequestBody Tema tema){
+	public ResponseEntity<Tema> post (@Valid @RequestBody Tema tema){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
 	
@@ -52,7 +54,7 @@ public class TemaController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long id) {
+	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
 	

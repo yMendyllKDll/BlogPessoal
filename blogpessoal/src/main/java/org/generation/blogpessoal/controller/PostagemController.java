@@ -2,6 +2,8 @@ package org.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.generation.blogpessoal.model.Postagem;
 import org.generation.blogpessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/postagens")
-@CrossOrigin("*")		                  //Aceita a requisição
+@CrossOrigin("*")	                                //Aceita a requisição
 public class PostagemController {
 	 	
 		@Autowired	                  //transfere a responsabilidade do controller para repository para acessar o banco
@@ -43,7 +45,7 @@ public class PostagemController {
 		}
 		
 		@PostMapping //metodo post
-		public ResponseEntity<Postagem> post(@RequestBody Postagem postagem){       //pegar o corpo da requisição
+		public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){       //pegar o corpo da requisição
 			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem)); //endpoint de postagem
 		}
 		
