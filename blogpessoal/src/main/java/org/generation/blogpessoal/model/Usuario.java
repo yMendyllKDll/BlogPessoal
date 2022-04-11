@@ -1,7 +1,6 @@
 package org.generation.blogpessoal.model;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 
@@ -36,8 +35,9 @@ public class Usuario {
 	
 	private String foto;
 	
+	@Schema(example = "email@email.com.br")
 	@NotBlank (message = "usuario obrigatório!")
-	@Email
+	@Email(message = "O atributo Usuario deve ser um email válido!")
 	private String usuario;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
